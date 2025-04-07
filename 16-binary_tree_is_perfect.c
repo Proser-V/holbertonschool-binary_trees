@@ -32,26 +32,16 @@ size_t binary_tree_height(const binary_tree_t *tree)
 
 int binary_tree_is_full(const binary_tree_t *tree)
 {
-	int check = 0;
-
 	if (tree == NULL)
 		return (0);
 
-	if (tree->left != NULL)
-	{
-		if (tree->right == NULL)
-			return (0);
-	}
-	else if (tree->left == NULL)
-	{
-		if (tree->right != NULL)
-			return (0);
-	return (1);
-	}
-	check = binary_tree_is_full(tree->left);
-	check = binary_tree_is_full(tree->right);
+	if ((tree->left == NULL) && (tree->right == NULL))
+		return (1);
 
-	return (check);
+	if ((tree->left != NULL) && (tree->right != NULL))
+		return (binary_tree_is_full(tree->left) && binary_tree_is_full(tree->right));
+
+	return (0);
 }
 /**
  * binary_tree_balance - Measures the balance factor of a binary tree.
